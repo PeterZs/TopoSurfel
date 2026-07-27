@@ -1,10 +1,26 @@
+# Install CUDA-dependent packages separately as described in README.md.
+
+# Core runtime
+numpy
+Pillow
+tqdm
+PyYAML
+tensorboard
+
+# Image, rendering, and geometry utilities
+opencv-python
 open3d
 plyfile
-opencv-python
-lpips
 trimesh
 scikit-image
+imageio
+matplotlib
+scipy
+scikit-learn
+pymeshlab
 libigl
 kiui
-pymeshlab
-collection
+lpips
+
+# Differentiable mesh extraction
+diso==0.1.4

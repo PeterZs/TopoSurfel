@@ -1,25 +1,23 @@
-# TopoSurfel
+<h1 align="center">TopoSurfel: Closing the Loop between Gaussian Surfels and Meshes for Surface Reconstruction</h1>
 
-### Synergistic Surfel-Mesh Co-evolution for Efficient and High-Fidelity Surface Reconstruction
+<h3 align="center">SIGGRAPH Asia 2026 (TOG)</h3>
 
-**SIGGRAPH Asia 2026 (ACM Transactions on Graphics)**
+<p align="center">
+  Chuanjin Fan &middot; Wenjie Chang &middot; Bohao Liao &middot; Yujia Chen &middot; Wenfei Yang &middot; Tianzhu Zhang
+</p>
 
-<!-- Add the author list, affiliations, paper, project page, and video links before release. -->
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/arXiv-Coming%20Soon-B31B1B?logo=arxiv&logoColor=white" alt="arXiv"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Project%20Page-Coming%20Soon-4285F4?logo=googlechrome&logoColor=white" alt="Project Page"></a>
+</p>
 
 <p align="center">
   <img src="assets/teaser.png" width="100%">
 </p>
 
-TopoSurfel reconstructs high-quality surfaces from multi-view RGB images by jointly evolving Gaussian surfels and a proxy mesh. Gaussian surfels provide appearance and fine geometric evidence, while the proxy mesh supplies explicit geometric guidance throughout optimization. This bidirectional interaction improves reconstruction quality and reduces optimization time across object-centric and large-scale scenes.
+TopoSurfel is a surface reconstruction framework that tightly couples Gaussian surfels with a differentiable proxy mesh. This closed-loop co-evolution brings global geometric guidance into 3D Gaussian splatting, suppressing floaters, filling holes, and improving reconstruction accuracy across diverse scenes while retaining efficient training and high-quality rendering.
 
-## Highlights
-
-- **Synergistic surfel-mesh co-evolution.** Gaussian surfels and the proxy mesh continuously guide each other during optimization.
-- **Geometry-aware surfel optimization.** The proxy mesh guides surfel initialization, normal orientation, and mesh-aware densification.
-- **Differentiable mesh reconstruction.** Oriented surfels are converted to a proxy mesh through DPSR and differentiable dual marching cubes.
-- **Broad benchmark coverage.** The code supports DTU, Tanks and Temples, Mip-NeRF 360, and NeRF-Synthetic.
-
-## Pipeline
+## 🌀 Pipeline
 
 TopoSurfel uses a two-stage reconstruction pipeline:
 
@@ -44,23 +42,7 @@ Mip-NeRF 360 and Tanks and Temples initialization scripts additionally create:
 
 TopoSurfel uses this point cloud as optional background initialization for scene-level meshes.
 
-## Installation
-
-### Tested environment
-
-The code has been tested with:
-
-- Ubuntu Linux
-- Python 3.10
-- CUDA 12.1
-- PyTorch 2.5.1
-- torchvision 0.20.1
-- PyTorch3D 0.7.9
-- nvdiffrast 0.4.0
-- DISO 0.1.4
-- Kaolin 0.18.0
-
-### Setup
+## ⚙️ Installation
 
 Create a Conda environment and install PyTorch:
 
@@ -72,14 +54,17 @@ pip install torch==2.5.1 torchvision==0.20.1 \
     --index-url https://download.pytorch.org/whl/cu121
 ```
 
-Install the Python dependencies and CUDA extensions:
+Install the Python dependencies:
 
 ```bash
 pip install -r requirements.txt
+```
 
+Install the CUDA-dependent packages separately. The commands below are for the tested PyTorch 2.5.1 / CUDA 12.1 configuration:
+
+```bash
 pip install git+https://github.com/NVlabs/nvdiffrast.git --no-build-isolation
-pip install git+https://github.com/facebookresearch/pytorch3d.git --no-build-isolation
-pip install diso==0.1.4
+pip install git+https://github.com/facebookresearch/pytorch3d.git@v0.7.9 --no-build-isolation
 pip install kaolin==0.18.0 \
     -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.5.1_cu121.html
 
@@ -89,7 +74,7 @@ pip install submodules/simple-knn --no-build-isolation
 
 If you use another PyTorch or CUDA version, install matching builds of PyTorch3D and [Kaolin](https://kaolin.readthedocs.io/en/stable/notes/installation.html). A working CUDA compiler must be available when building the rasterizer and KNN extensions.
 
-## Data Preparation
+## 📦 Data Preparation
 
 The following datasets are supported:
 
@@ -146,7 +131,7 @@ Each scene must initially contain `images_raw/`, `<scene>_COLMAP_SfM.log`, `<sce
 python scripts/preprocess/convert_tnt.py --tnt_path workdir/TNT
 ```
 
-## Quick Start
+## 🚀 Quick Start
 
 The example below reconstructs DTU scan 24.
 
@@ -205,7 +190,7 @@ CUDA_VISIBLE_DEVICES=0 python scripts/eval_dtu/evaluate_single_scene.py \
     --DTU workdir/DTU
 ```
 
-## Reproducing the Paper Results
+## 📊 Reproducing the Paper Results
 
 The provided scripts run initialization, TopoSurfel training, mesh extraction, and evaluation for all benchmark scenes.
 
@@ -260,7 +245,7 @@ python scripts/run_nerf.py
 
 The script trains all eight synthetic scenes, extracts meshes, and reports novel-view synthesis metrics.
 
-## Custom Dataset
+## 🧩 Custom Dataset
 
 TopoSurfel accepts the standard COLMAP format used by 3D Gaussian Splatting:
 
@@ -289,7 +274,7 @@ python train.py -s <scene> -m <output>
 python render.py -m <output> --voxel_size 0.01 --max_depth 10.0
 ```
 
-## Important Options
+## 🛠️ Important Options
 
 | Option | Default | Description |
 |---|---:|---|
@@ -308,42 +293,17 @@ python render.py -m <output> --voxel_size 0.01 --max_depth 10.0
 
 All options defined in `arguments/__init__.py` can be passed directly to `train.py`. Dataset-specific extraction settings are provided in the scripts under `scripts/`.
 
-## Troubleshooting
-
-### `mesh_init.ply` is missing
-
-Run the corresponding script under `PGSR/scripts/` first. TopoSurfel training always reads `<scene>/mesh_init.ply`.
-
-### CUDA extensions cannot be imported
-
-Reinstall the extensions after activating the intended environment:
-
-```bash
-pip install --force-reinstall submodules/diff-plane-rasterization --no-build-isolation
-pip install --force-reinstall submodules/simple-knn --no-build-isolation
-```
-
-Make sure `nvcc --version` is compatible with the CUDA version used by PyTorch.
-
-### Out-of-memory errors
-
-Set `--data_device cpu`, reduce the image resolution with `-r`, or reduce `--grid_res_in_the_loop`. The benchmark scripts already load selected large scenes from CPU.
-
-### PGSR scripts cannot find the data
-
-Run the initialization scripts from inside `PGSR/`. Their default data paths begin with `../workdir/`.
-
-## License
+## 📜 License
 
 This project is released under the terms in [LICENSE.md](LICENSE.md). Some components are derived from or depend on separately licensed projects; their original licenses continue to apply.
 
-## Acknowledgements
+## 🙏 Acknowledgements
 
 This codebase builds upon [3D Gaussian Splatting](https://github.com/graphdeco-inria/gaussian-splatting) and [PGSR](https://github.com/zju3dv/PGSR). It also uses ideas or software from [2D Gaussian Splatting](https://surfsplatting.github.io/), [Gaussian Opacity Fields](https://github.com/autonomousvision/gaussian-opacity-fields), [MILo](https://github.com/Anttwo/MILo), [DPSR](https://github.com/autonomousvision/shape_as_points), [DISO](https://github.com/SarahWeiii/diso), [nvdiffrast](https://github.com/NVlabs/nvdiffrast), [PyTorch3D](https://github.com/facebookresearch/pytorch3d), and [Kaolin](https://github.com/NVIDIAGameWorks/kaolin).
 
 The DTU and Tanks and Temples evaluation code is adapted from [DTUeval-python](https://github.com/jzhangbs/DTUeval-python) and the [Tanks and Temples evaluation toolbox](https://github.com/isl-org/TanksAndTemples).
 
-## Citation
+## 📝 Citation
 
 The final BibTeX entry will be added with the paper release.
 
