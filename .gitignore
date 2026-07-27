@@ -1,0 +1,23 @@
+*.pyc
+.vscode
+output
+build
+data
+*.ply
+**/PKG-INFO
+# submodules
+**__pycache__**
+*.png
+!assets/teaser.png
+*.out
+eval
+*.npz
+**/tmp
+
+workdir/**
+outputs/**
+test/**
+output_dtu/**
+output_tnt/**
+output_nerf/**
+output_mip360/**

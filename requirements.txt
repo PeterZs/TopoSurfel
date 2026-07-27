@@ -1,0 +1,10 @@
+open3d
+plyfile
+opencv-python
+lpips
+trimesh
+scikit-image
+libigl
+kiui
+pymeshlab
+collection
