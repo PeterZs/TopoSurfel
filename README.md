@@ -3,7 +3,11 @@
 <h3 align="center">SIGGRAPH Asia 2026 (TOG)</h3>
 
 <p align="center">
-  Chuanjin Fan &middot; Wenjie Chang &middot; Bohao Liao &middot; Yujia Chen &middot; Wenfei Yang &middot; Tianzhu Zhang
+  Chuanjin Fan, Wenjie Chang, Bohao Liao, Yujia Chen, Wenfei Yang, and Tianzhu Zhang
+</p>
+
+<p align="center">
+  University of Science and Technology of China
 </p>
 
 <p align="center">
