@@ -7,8 +7,9 @@
 </p>
 
 <p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/arXiv-Coming%20Soon-B31B1B?logo=arxiv&logoColor=white" alt="arXiv"></a>
-  <a href="#"><img src="https://img.shields.io/badge/Project%20Page-Coming%20Soon-4285F4?logo=googlechrome&logoColor=white" alt="Project Page"></a>
+  <a href="https://arxiv.org/abs/2608.20687"><img src="https://img.shields.io/badge/arXiv-2608.20687-B31B1B?logo=arxiv&logoColor=white" alt="arXiv"></a>
+  <a href="https://fan-treasure.github.io/TopoSurfel_page/"><img src="https://img.shields.io/badge/Project%20Page-4285F4?logo=googlechrome&logoColor=white" alt="Project Page"></a>
+  <a href="https://www.youtube.com/watch?v=PAG5X6h7xYI"><img src="https://img.shields.io/badge/Video-FF0000?logo=youtube&logoColor=white" alt="Video"></a>
 </p>
 
 <p align="center">
@@ -305,13 +306,13 @@ The DTU and Tanks and Temples evaluation code is adapted from [DTUeval-python](h
 
 ## 📝 Citation
 
-The final BibTeX entry will be added with the paper release.
+If you find this work useful, please cite:
 
-<!--
-@article{...,
-  title   = {...},
-  author  = {...},
-  journal = {ACM Transactions on Graphics},
+```bibtex
+@article{fan2026toposurfel,
+  title   = {TopoSurfel: Closing the Loop between Gaussian Surfels and Meshes for Surface Reconstruction},
+  author  = {Fan, Chuanjin and Chang, Wenjie and Liao, Bohao and Chen, Yujia and Yang, Wenfei and Zhang, Tianzhu},
+  journal = {arXiv preprint arXiv:2608.20687},
   year    = {2026}
 }
--->
+```
