@@ -318,6 +318,6 @@ If you find this work useful, please cite:
   author  = {Fan, Chuanjin and Chang, Wenjie and Liao, Bohao and Chen, Yujia and Yang, Wenfei and Zhang, Tianzhu},
   journal = {arXiv preprint arXiv:2608.20687},
   year    = {2026},
-  url={https://fan-treasure.github.io/TopoSurfel_page/}
+  url     = {https://fan-treasure.github.io/TopoSurfel_page/}
 }
 ```
