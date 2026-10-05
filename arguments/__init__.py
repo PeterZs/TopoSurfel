@@ -117,7 +117,7 @@ class OptimizationParams(ParamGroup):
         self.exposure_compensation = False
         self.random_background = False
         
-        self.mesh_from_iter = 1000
+        self.mesh_from_iter = 5000
         self.no_surface_prior = False
         self.detach_gaussian_rendering = False
         self.grid_res_in_the_loop = 360
